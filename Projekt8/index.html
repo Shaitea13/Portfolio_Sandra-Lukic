@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musik Player - Sandra Lukic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="player-container">
+        <!-- Header -->
+        <header class="player-header">
+            <button class="back-btn" onclick="window.close()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Music Player</h1>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+        </header>
+        
+        <!-- Menu Dropdown -->
+        <div class="menu-dropdown" id="menuDropdown">
+            <a href="#" id="clearPlaylistBtn"><i class="fas fa-trash"></i> Playlist löschen</a>
+            <a href="#" id="aboutBtn"><i class="fas fa-info-circle"></i> Über</a> 
+            <a href="#" id="exportPlaylistBtn"><i class="fas fa-download"></i> Playlist exportieren</a>
+            <a href="#" id="importPlaylistBtn"><i class="fas fa-upload"></i> Playlist importieren</a>
+        </div>
+        
+        <!-- Visualizer -->
+        <div class="visualizer-container">
+            <canvas id="visualizer"></canvas>
+            <div class="album-art" id="albumArt">
+                <i class="fas fa-music"></i>
+            </div>
+        </div>
+        
+        <!-- Song Info -->
+        <div class="song-info">
+            <h2 id="songTitle">Wähle einen Song</h2>
+            <p id="artistName">Keine Musik geladen</p>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <span class="time" id="currentTime">0:00</span>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+                <div class="progress-dot"></div>
+            </div>
+            <span class="time" id="duration">0:00</span>
+        </div>
+        
+        <!-- Controls -->
+        <div class="controls">
+            <button class="control-btn" id="shuffleBtn" title="Zufällige Wiedergabe">
+                <i class="fas fa-random"></i>
+            </button>
+            <button class="control-btn" id="prevBtn" title="Vorheriger Song">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="control-btn main-btn" id="playPauseBtn" title="Play/Pause">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn" id="nextBtn" title="Nächster Song">
+                <i class="fas fa-step-forward"></i>
+            </button>
+            <button class="control-btn" id="repeatBtn" title="Wiederholen">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+        
+        <!-- Volume Control -->
+        <div class="volume-control">
+            <button class="volume-btn" id="volumeBtn">
+                <i class="fas fa-volume-down"></i>
+            </button>
+            <input type="range" id="volumeSlider" min="0" max="100" value="30">
+            <span class="volume-percent">30%</span>
+        </div>
+        
+        <!-- Playlist -->
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <h3>Playlist</h3>
+                <div class="playlist-controls">
+                    <button class="save-btn" id="savePlaylistBtn" title="Playlist speichern">
+                        <i class="fas fa-save"></i>
+                    </button>
+                    <button class="load-btn" id="loadPlaylistBtn" title="Playlist laden">
+                        <i class="fas fa-folder-open"></i>
+                    </button>
+                    <button class="add-btn" id="addSongBtn">
+                        <i class="fas fa-plus"></i> Musik hinzufügen
+                    </button>
+                </div>
+            </div>
+            <div class="playlist" id="playlist">
+                <!-- Songs werden hier dynamisch hinzugefügt -->
+            </div>
+        </div>
+        
+        <!-- Visualizer Mode Selector -->
+        <div class="visualizer-modes">
+            <button class="mode-btn active" data-mode="bars">Balken</button>
+            <button class="mode-btn" data-mode="wave">Welle</button>
+            <button class="mode-btn" data-mode="circle">Kreis</button>
+        </div>
+    </div>
+    
+    <!-- Hidden elements -->
+    <input type="file" id="fileInput" accept="audio/*" multiple style="display: none;">
+    <input type="file" id="importInput" accept=".json,.m3u,.m3u8" style="display: none;">
+    
+    <!-- Audio Element -->
+    <audio id="audioPlayer" crossorigin="anonymous"></audio>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

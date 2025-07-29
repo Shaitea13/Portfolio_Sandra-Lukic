@@ -1,0 +1,85 @@
+body {
+    font-family: "Bauhaus 93";
+    display: flex;
+    flex-direction: column; /* Vertikale Anordnung */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #e8efca, #c3f6ea, #f7dfe9, #d3fce6, #f0f5ca);
+}
+
+h1 {
+    margin-bottom: 30px; /* Abstand zwischen Titel und Spielbrett */
+    font-size: 3.5em; /* Größerer Titel */
+}
+
+.tictactoe {
+    width: 450px;
+    height: 450px;
+    background-color: rgb(234, 198, 70);
+    border-radius: 100px; /* Abgerundete Ecken für das Innere */
+    border: 70px solid #008C8C; /* Petrol */
+    display: grid;
+    grid-template-columns: repeat(3, 150px); /* Feste Breite für alle Spalten */
+    grid-template-rows: repeat(3, 150px);  /* Feste Höhe für alle Zeilen */
+    position: relative;
+    overflow: hidden; /* Verhindert, dass die Linien die Ecken überdecken */
+}
+
+.line {
+    position: absolute;
+    background-color: white;
+}
+
+.line.horizontal {
+    width: 100%;
+    height: 10px;
+}
+
+.line.vertical {
+    height: 100%;
+    width: 10px;
+}
+
+.line:nth-child(1) { top: 33.33%; left: 0; } /* 1. horizontale Linie */
+.line:nth-child(2) { top: 66.66%; left: 0; } /* 2. horizontale Linie */
+.line:nth-child(3) { left: 33.33%; top: 0; } /* 1. vertikale Linie */
+.line:nth-child(4) { left: 66.66%; top: 0; } /* 2. vertikale Linie */
+
+.cell {
+    display: flex;
+    justify-content: center; /* Horizontale Zentrierung */
+    align-items: center; /* Vertikale Zentrierung */
+    font-size: 5em; /* Größere Symbole, um sie zentriert zu halten */
+    position: relative;
+    cursor: pointer;
+    border-radius: 30px; /* Abgerundete Ecken für die Zellen */
+    overflow: hidden; /* Verhindert, dass Symbole über die Zellen hinausgehen */
+}
+
+.cross {
+    color: #C72C41; /* Kirschrot */
+}
+
+.circle {
+    color: #6A0DAD; /* Lila */
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 2em; /* Größe der Spielstandmitteilung */
+    text-align: center;
+}
+
+#resetButton {
+    margin-top: 20px; /* Abstand zwischen Nachricht und Button */
+    padding: 10px 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: #008C8C; /* Petrol */
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+

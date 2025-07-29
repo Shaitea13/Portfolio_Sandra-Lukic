@@ -1,0 +1,463 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #e8efca, #c3f6ea, #f7dfe9, #d3fce6, #f0f5ca);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Hauptcontainer für das gesamte Spiel */
+.main-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Abstand zwischen Spiel und Rangliste */
+    position: relative;
+}
+
+/* Spiel-Bereich (Titel + Canvas + Buttons + Joystick) - ZENTRIERT */
+.game-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: clamp(40px, 5vw, 65px); 
+    color: #009b75; 
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+/* Game Container - nur für Canvas, Buttons und Joystick */
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Canvas */
+canvas {
+    border: 1px solid #000;
+    background-color: #120f0f; 
+    border-radius: 30px;
+    width: 600px;
+    height: 400px;
+}
+
+/* Seitliches Panel - ABSOLUT POSITIONIERT neben dem Spiel */
+.side-panel {
+    position: absolute;
+    right: -290px; /* 250px Breite + 40px Abstand */
+    top: 50%;
+    transform: translateY(-80%);
+    width: 250px;
+}
+
+/* Rechtes Panel mit Rangliste und Score */
+#rightPanel {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Canvas beim Laden - zeigt Willkommensnachricht */
+.welcome-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #120f0f;
+}
+
+/* Score Bereich unter der Rangliste */
+#scoreArea {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+}
+
+#scoreArea h2 {
+    color: #009b75;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+#score, #bestScore {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Buttons Container */
+.button-container {
+    display: flex;
+    gap: 15px;
+}
+
+/* Start Button */
+#startButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: black; 
+    background-color: rgb(237, 204, 38); 
+    border: 2px solid black; 
+    border-radius: 25px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+}
+
+#startButton:hover {
+    background-color: #009b75; 
+}
+
+/* Reset Button */
+#resetButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white; 
+    background-color: #e74c3c; 
+    border: 2px solid black; 
+    border-radius: 25px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+}
+
+#resetButton:hover {
+    background-color: #c0392b; 
+}
+
+/* Joystick */
+#joystick {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: space-between; 
+    width: 150px;
+}
+
+.direction {
+    width: 60px;
+    height: 60px;
+    background-color: rgb(237, 204, 38); 
+    border: 2px solid black; 
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    margin: 1px; 
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.direction:active {
+    transform: scale(0.95);
+}
+
+/* Pfeile */
+.arrow {
+    width: 0;
+    height: 0;
+    position: absolute; 
+}
+
+.up {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 25px solid black; 
+    top: 15px;
+}
+
+.down {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 25px solid black; 
+    bottom: 15px;
+}
+
+.left {
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 25px solid black; 
+    left: 15px;
+}
+
+.right {
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 25px solid black; 
+    right: 15px;
+}
+
+/* Rangliste */
+#leaderboard {
+    text-align: center;
+}
+
+#leaderboard h2 {
+    color: #009b75;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+#leaderboardList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#leaderboardList li {
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+#leaderboardList li:hover {
+    background-color: rgba(237, 204, 38, 0.3);
+}
+
+#leaderboardList li:first-child {
+    background-color: rgba(255, 215, 0, 0.3);
+    font-weight: bold;
+}
+
+/* Lösch-Button für Rangliste */
+#clearLeaderboardBtn {
+    width: 60%;
+    margin-top: 15px;
+    padding: 8px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+#clearLeaderboardBtn:hover {
+    background-color: #c0392b;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: #009b75;
+    margin-bottom: 15px;
+}
+
+#nicknameInput {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #009b75;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#saveScoreBtn, #skipScoreBtn {
+    margin: 5px;
+    padding: 8px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#saveScoreBtn {
+    background-color: #009b75;
+    color: white;
+    border: none;
+}
+
+#saveScoreBtn:hover {
+    background-color: #00785c;
+}
+
+#skipScoreBtn {
+    background-color: #ccc;
+    border: none;
+}
+
+#skipScoreBtn:hover {
+    background-color: #aaa;
+}
+
+/* Buttons im Confirm Modal */
+#confirmDeleteBtn, #cancelDeleteBtn {
+    margin: 5px;
+    padding: 8px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#confirmDeleteBtn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+}
+
+#confirmDeleteBtn:hover {
+    background-color: #c0392b;
+}
+
+#cancelDeleteBtn {
+    background-color: #ccc;
+    border: none;
+}
+
+#cancelDeleteBtn:hover {
+    background-color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .side-panel {
+        position: static;
+        transform: none;
+    }
+    
+    .main-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .side-panel {
+        width: 90%;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 10px;
+    }
+    
+    h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    
+    canvas {
+        width: 90vw;
+        max-width: 500px;
+        height: 60vw;
+        max-height: 350px;
+    }
+    
+    .side-panel {
+        width: 90vw;
+        max-width: 500px;
+        position: static;
+        transform: none;
+    }
+    
+    #rightPanel {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .direction {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .horizontal {
+        width: 120px;
+    }
+    
+    .up {
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 20px solid black;
+        top: 13px;
+    }
+    
+    .down {
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 20px solid black;
+        bottom: 13px;
+    }
+    
+    .left {
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 20px solid black;
+        left: 13px;
+    }
+    
+    .right {
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 20px solid black;
+        right: 13px;
+    }
+}
+
+/* Für sehr große Bildschirme */
+@media (min-width: 1920px) {
+    h1 {
+        font-size: 80px;
+    }
+    
+    canvas {
+        width: 800px;
+        height: 533px;
+    }
+    
+    .side-panel {
+        width: 300px;
+        right: -340px; /* 300px Breite + 40px Abstand */
+    }
+    
+    .direction {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .horizontal {
+        width: 200px;
+    }
+}

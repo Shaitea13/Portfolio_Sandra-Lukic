@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App - Sandra Lukic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="app-logo">
+                    <i class="fas fa-comments"></i>
+                    <h1>ChatHub</h1>
+                </div>
+                <button class="new-chat-btn" id="newChatBtn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h3 id="userName">Sandra</h3>
+                    <span class="status online">Online</span>
+                </div>
+                <button type="button" class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+            <!-- Search -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Suche..." id="searchInput">
+            </div>
+            <!-- Chat Tabs -->
+            <div class="chat-tabs">
+                <button class="tab-btn active" data-tab="chats">
+                    <i class="fas fa-comment"></i>
+                    Chats
+                </button>
+                <button class="tab-btn" data-tab="groups">
+                    <i class="fas fa-users"></i>
+                    Gruppen
+                </button>
+            </div>
+            <!-- Chat List -->
+            <div class="chat-list" id="chatList">
+                <div class="chat-item active" data-chat-id="1">
+                    <div class="chat-avatar">
+                        <i class="fas fa-user"></i>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div class="chat-info">
+                        <h4>Max Mustermann</h4>
+                        <p>Hey, wie geht's?</p>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="time">14:30</span>
+                        <span class="unread-count">2</span>
+                    </div>
+                </div>
+                <div class="chat-item" data-chat-id="2">
+                    <div class="chat-avatar group">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h4>Team Projekt</h4>
+                        <p>Anna: Super Idee! 👍</p>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="time">12:15</span>
+                    </div>
+                </div>
+                <div class="chat-item" data-chat-id="3">
+                    <div class="chat-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h4>Julia Schmidt</h4>
+                        <p>Bis morgen!</p>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="time">Gestern</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- Chat Area -->
+        <main class="chat-area">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="chat-header-info">
+                    <div class="header-avatar">
+                        <i class="fas fa-user"></i>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div class="header-details">
+                        <h2 id="chatName">Max Mustermann</h2>
+                        <span class="typing-indicator" id="typingIndicator">Schreibt...</span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn" title="Videoanruf">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="action-btn" title="Anrufen">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <button class="action-btn" id="infoBtn" title="Info">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Messages Area -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="date-divider">
+                    <span>Heute</span>
+                </div>
+                
+                <div class="message received">
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hey! Wie geht's dir? 😊</p>
+                        </div>
+                        <span class="message-time">14:25</span>
+                    </div>
+                </div>
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hi! Mir geht's super, danke! Und dir?</p>
+                        </div>
+                        <span class="message-time">14:28</span>
+                    </div>
+                </div>
+                <div class="message received">
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Auch gut! Hast du Lust morgen was zu unternehmen?</p>
+                        </div>
+                        <span class="message-time">14:30</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Message Input -->
+            <div class="message-input-container">
+                <div class="input-actions">
+                    <button class="input-btn" id="attachBtn" title="Datei anhängen">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="input-btn" id="emojiBtn" title="Emoji">
+                        <i class="far fa-smile"></i>
+                    </button>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" id="messageInput" placeholder="Nachricht schreiben..." autocomplete="off">
+                </div>
+                <button class="send-btn" id="sendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <!-- Emoji Picker -->
+            <div class="emoji-picker" id="emojiPicker">
+                <div class="emoji-header">
+                    <button class="emoji-tab active" data-category="smileys">😀</button>
+                    <button class="emoji-tab" data-category="animals">🐶</button>
+                    <button class="emoji-tab" data-category="food">🍕</button>
+                    <button class="emoji-tab" data-category="activities">⚽</button>
+                    <button class="emoji-tab" data-category="objects">💡</button>
+                </div>
+                <div class="emoji-grid" id="emojiGrid">
+                    <!-- Emojis werden hier eingefügt -->
+                </div>
+            </div>
+        </main>
+        <!-- Info Sidebar -->
+        <aside class="info-sidebar" id="infoSidebar">
+            <div class="info-header">
+                <h3>Chat-Info</h3>
+                <button class="close-btn" id="closeInfoBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="info-content">
+                <div class="info-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 id="infoName">Max Mustermann</h2>
+                <p class="info-status">Online</p>
+                
+                <div class="info-section">
+                    <h4>Geteilte Medien</h4>
+                    <div class="media-grid">
+                        <div class="media-item">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="media-item">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="media-item">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-actions">
+                    <button class="info-action-btn">
+                        <i class="fas fa-bell-slash"></i>
+                        Stummschalten
+                    </button>
+                    <button class="info-action-btn danger">
+                        <i class="fas fa-trash"></i>
+                        Chat löschen
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Einstellungen</h2>
+                <button class="close-modal" id="closeSettingsBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-item">
+                    <label for="userNameInput">Dein Name:</label>
+                    <input type="text" id="userNameInput" value="Sandra">
+                </div>
+                <div class="setting-item">
+                    <label>Status:</label>
+                    <select id="statusSelect">
+                        <option value="online">Online</option>
+                        <option value="away">Abwesend</option>
+                        <option value="busy">Beschäftigt</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="notificationsToggle" checked>
+                        Benachrichtigungen aktivieren
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="soundToggle" checked>
+                        Töne aktivieren
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="save-settings-btn" id="saveSettingsBtn">Speichern</button>
+            </div>
+        </div>
+    </div>
+    <!-- File input (hidden) -->
+    <input type="file" id="fileInput" style="display: none;" multiple>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker - Finanzen im Griff</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>💰 Budget Tracker</h1>
+                <p>Behalte deine Finanzen im Blick</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Dashboard Cards -->
+        <div class="dashboard">
+            <div class="card card-income">
+                <div class="card-icon">📈</div>
+                <div class="card-title">Einnahmen</div>
+                <div class="card-value" id="totalIncome">0,00 €</div>
+                <div class="card-subtitle">Diesen Monat</div>
+            </div>
+            
+            <div class="card card-expense">
+                <div class="card-icon">📉</div>
+                <div class="card-title">Ausgaben</div>
+                <div class="card-value" id="totalExpense">0,00 €</div>
+                <div class="card-subtitle">Diesen Monat</div>
+            </div>
+            
+            <div class="card card-balance">
+                <div class="card-icon">💵</div>
+                <div class="card-title">Bilanz</div>
+                <div class="card-value" id="totalBalance">0,00 €</div>
+                <div class="card-subtitle">Verfügbar</div>
+            </div>
+            
+            <div class="card card-budget">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">Budget</div>
+                <div class="card-value" id="budgetStatus">0%</div>
+                <div class="card-subtitle">Verwendet</div>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Transaction Form -->
+            <div class="transaction-form">
+                <h2 class="form-title">Neue Transaktion</h2>
+                
+                <div class="transaction-type">
+                    <button class="type-btn income active" data-type="income">
+                        💰 Einnahme
+                    </button>
+                    <button class="type-btn expense" data-type="expense">
+                        💸 Ausgabe
+                    </button>
+                </div>
+
+                <form id="transactionForm">
+                    <div class="form-group">
+                        <label class="form-label">Beschreibung</label>
+                        <input type="text" class="form-control" id="description" placeholder="z.B. Gehalt, Einkauf..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Betrag</label>
+                        <input type="number" class="form-control" id="amount" placeholder="0,00" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Kategorie</label>
+                        <select class="form-control" id="category" required>
+                            <option value="">Kategorie wählen...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Datum</label>
+                        <input type="date" class="form-control" id="date" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Transaktion hinzufügen
+                    </button>
+                </form>
+            </div>
+
+            <!-- Transaction List -->
+            <div class="transaction-list">
+                <div class="list-header">
+                    <h2 class="form-title">Transaktionen</h2>
+                    <div>
+                        <button class="filter-btn active" data-filter="all">Alle</button>
+                        <button class="filter-btn" data-filter="income">Einnahmen</button>
+                        <button class="filter-btn" data-filter="expense">Ausgaben</button>
+                    </div>
+                </div>
+                
+                <div id="transactionList">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <p>Noch keine Transaktionen vorhanden</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budget Section -->
+        <div class="budget-section">
+            <div class="budget-header">
+                <h2 class="form-title">Budget-Ziele</h2>
+                <button class="add-budget-btn" onclick="app.openBudgetModal()">
+                    + Budget hinzufügen
+                </button>
+            </div>
+            
+            <div id="budgetList">
+                <div class="empty-state">
+                    <div class="empty-state-icon">🎯</div>
+                    <p>Noch keine Budget-Ziele gesetzt</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="main-grid">
+            <div class="chart-container">
+                <h2 class="form-title">Ausgaben nach Kategorie</h2>
+                <div class="chart-wrapper">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="form-title">Monatlicher Verlauf</h2>
+                <div class="chart-wrapper">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <h2 class="form-title">Statistiken & Analyse</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Top Ausgaben-Kategorien</h3>
+                    <div id="topCategories"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Monatsvergleich</h3>
+                    <div id="monthComparison"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Sparquote</h3>
+                    <div id="savingsRate"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>Durchschnittliche Ausgaben</h3>
+                    <div id="avgExpenses"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export/Import Section -->
+        <div class="data-section">
+            <h2 class="form-title">Daten verwalten</h2>
+            <div class="data-buttons">
+                <button class="btn btn-secondary" onclick="app.exportData()">
+                    📥 Daten exportieren
+                </button>
+                <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">
+                    📤 Daten importieren
+                </button>
+                <input type="file" id="importFile" style="display: none;" accept=".json" onchange="app.importData(event)">
+                <button class="btn btn-danger" onclick="app.clearAllData()">
+                    🗑️ Alle Daten löschen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Budget Modal -->
+    <div class="modal" id="budgetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="form-title">Budget-Ziel setzen</h2>
+                <button class="close-modal" onclick="app.closeBudgetModal()">×</button>
+            </div>
+            
+            <form id="budgetForm">
+                <div class="form-group">
+                    <label class="form-label">Kategorie</label>
+                    <select class="form-control" id="budgetCategory" required>
+                        <option value="">Kategorie wählen...</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Monatliches Limit</label>
+                    <input type="number" class="form-control" id="budgetLimit" placeholder="0,00" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Zeitraum</label>
+                    <select class="form-control" id="budgetPeriod">
+                        <option value="monthly">Monatlich</option>
+                        <option value="weekly">Wöchentlich</option>
+                        <option value="yearly">Jährlich</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    Budget setzen
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

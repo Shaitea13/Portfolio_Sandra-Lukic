@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Spiel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Spiel-Bereich (Mitte) -->
+        <div class="game-section">
+            <h1>Snake</h1>
+            <div id="gameContainer">
+                <canvas id="gameCanvas" width="600" height="400"></canvas>
+                <div class="button-container">
+                    <button id="startButton">Spiel Starten</button>
+                    <button id="resetButton" style="display: none;">Zurücksetzen</button>
+                </div>
+                <!-- Joystick -->
+                <div id="joystick">
+                    <div class="direction" id="upButton">
+                        <div class="arrow up"></div>
+                    </div>
+                    <div class="horizontal">
+                        <div class="direction" id="leftButton">
+                            <div class="arrow left"></div>
+                        </div>
+                        <div class="direction" id="rightButton">
+                            <div class="arrow right"></div>
+                        </div>
+                    </div>
+                    <div class="direction" id="downButton">
+                        <div class="arrow down"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seitliche Panel (Rangliste und Score) -->
+        <div class="side-panel">
+            <div id="rightPanel">
+                <div id="leaderboard">
+                    <h2>Rangliste</h2>
+                    <ol id="leaderboardList"></ol>
+                    <button id="clearLeaderboardBtn">Rangliste löschen</button>
+                </div>
+                
+                <!-- Score unter der Rangliste -->
+                <div id="scoreArea">
+                    <h2>Aktuelles Spiel</h2>
+                    <div id="score">Punkte: 0</div>
+                    <div id="bestScore">Best Score: 0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Nickname Modal -->
+    <div id="nicknameModal" class="modal">
+        <div class="modal-content">
+            <h3>Neuer Highscore!</h3>
+            <p>Gib deinen Nickname ein:</p>
+            <input type="text" id="nicknameInput" maxlength="20" placeholder="Dein Name">
+            <button id="saveScoreBtn">Speichern</button>
+            <button id="skipScoreBtn">Überspringen</button>
+        </div>
+    </div>
+     <!-- Bestätigungsmodal für Rangliste löschen -->
+        <div id="confirmModal" class="modal">
+            <div class="modal-content">
+                <p>Bist du sicher, dass du die Rangliste löschen möchtest?</p>
+                <button id="confirmDeleteBtn">Ja</button>
+                <button id="cancelDeleteBtn">Nein</button>
+</div>
+    </div>>
+    <script src="script.js"></script>
+</body>
+</html>

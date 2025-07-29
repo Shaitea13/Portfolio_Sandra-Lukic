@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wetter-App mit 24h und 15-Tage Vorhersage">
+    <meta name="theme-color" content="#4f28e9">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Wetter App</title>
+</head>
+<body>
+    <main class="container">
+        <section class="home" id="home">
+            <img src="Wetter Icons/regen.png" alt="Wetter Icon" class="large icon">
+            <h1 class="title">Wetter App</h1>
+            <input type="search" id="city" placeholder="Stadt eingeben" aria-label="Stadt eingeben" autocomplete="address-level2">
+            <button id="start">Starten</button>
+            <footer class="footer-container">
+                <small class="footer">Powered by open-meteo.com</small>
+                <a class="footer-link" href="https://www.flaticon.com/de/kostenlose-icons/meteorologie" title="Meteorologie Icons" rel="noopener external">
+                Freepik - Flaticon
+                </a>
+            </footer>
+        </section>
+        <section class="weather" id="weather" style="display: none;">
+            <nav>
+                <button class="back-button" id="backButton" aria-label="Zurück zur Startseite">←</button>
+            </nav>
+            
+            <header class="location-container">
+                <img src="Wetter Icons/location.png" alt="Standort Icon" class="small-icon">
+                <h2 id="cityName" class="city-name"></h2>
+            </header>
+            
+            <time id="dateTime" class="date-time" datetime=""></time>
+            
+            <section class="temperature-container" aria-label="Aktuelle Temperatur">
+                <data id="temperature" class="temperature" value="">°</data>
+                <img id="weatherIcon" src="Wetter Icons/default-icon.png" alt="Wetter Icon" id="weatherIcon">
+            </section>
+            
+            <div class="weather-info">
+                <p id="weatherDescription" class="weather-description">Wetterbeschreibung</p>
+            </div>
+            
+            <!-- ORIGINAL Daten-Container (vertikal) -->
+            <div class="data-container" role="list">
+                <div class="data" role="listitem">
+                    <img src="Wetter Icons/Niederschlag.png" alt="Niederschlag Icon" class="small-icon">
+                    <data id="precipitation" value="0">0 mm</data>
+                </div>
+                <div class="data" role="listitem">
+                    <img src="Wetter Icons/Luftfeuchtigkeit.png" alt="Luftfeuchtigkeit Icon" class="small-icon">
+                    <data id="humidity" value="0">0 %</data>
+                </div>
+                <div class="data" role="listitem">
+                    <img src="Wetter Icons/windig.png" alt="Windstärke Icon" class="small-icon">
+                    <data id="wind" value="0">0 km/h</data>
+                </div>
+            </div>
+            <!-- Neue stündliche Vorhersage (24h horizontal) -->
+            <section aria-label="Stündliche Vorhersage">
+                <h3 class="section-title">Stündliche Vorhersage (24h)</h3>
+                <div class="hourly-forecast-container">
+                    <div id="hourlyForecast" class="hourly-forecast" role="list"></div>
+                </div>
+            </section>
+            <!-- UPDATED 15-Tage-Vorhersage -->
+            <section aria-label="15-Tage-Vorhersage">
+                <h3 class="section-title">15-Tage-Vorhersage</h3>
+                <div id="weeklyForecast" class="weekly-forecast-new" role="list"></div>
+            </section>
+            <!-- Temperatur-Liniendiagramm -->
+            <section aria-label="Temperaturverlauf">
+                <h3 class="section-title">Temperaturverlauf (15 Tage)</h3>
+                <div class="chart-container">
+                    <canvas id="temperatureChart" aria-label="Temperatur-Liniendiagramm"></canvas>
+                </div>
+            </section>
+            <!-- Sonnenauf-/untergang -->
+            <section aria-label="Sonnenzeiten" id="sunSection">
+                <h3 class="section-title">Sonnenaufgang&Sonnenuntergang</h3>
+                <div class="sun-cycle">
+                    <div class="sun-arc">
+                        <div class="sun" role="img" aria-label="Sonne"></div>
+                    </div>
+                    <div class="sun-times">
+                        <div class="sun-time">
+                            <span role="img" aria-label="Sonnenaufgang">🌅</span>
+                            <time id="sunrise">--:--</time>
+                        </div>
+                        <div class="sun-time">
+                            <span role="img" aria-label="Sonnenuntergang">🌇</span>
+                            <time id="sunset">--:--</time>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
