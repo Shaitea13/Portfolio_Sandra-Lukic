@@ -1,10 +1,9 @@
-/* Reset und Basis-Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-/* CSS Variablen für einfache Anpassung */
+
 :root {
     --primary-color: #2d605c;
     --secondary-color: #f7dfe9;
@@ -19,8 +18,11 @@ body {
     overflow-x: hidden;
     background: linear-gradient(135deg, #e8efca 0%, #c3f6ea 25%, #f7dfe9 50%, #d3fce6 75%, #f0f5ca 100%);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
-/* Fixed Header */
+
 header {
     position: fixed;
     top: 0;
@@ -29,36 +31,55 @@ header {
     background: transparent;
     backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 20px 40px;
+    padding: 10px 40px;
 }
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 300vh;
-    margin: 0;
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
 }
 .logo {
     font-family: 'Acorn', sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 2.3vw, 2.3rem);
     letter-spacing: 2px;
     font-weight: 700;
     color: var(--primary-color);
 }
+
 nav ul {
     display: flex;
-    list-style: none;
-    gap: 20px;
+    list-style: none !important;
+    list-style-type: none !important;
+    gap: clamp(15px, 2vw, 40px);
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-wrap: nowrap;
+}
+nav ul li {
+    list-style: none !important;
+    list-style-type: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+nav ul li::before,
+nav ul li::marker {
+    content: none !important;
+    display: none !important;
 }
 nav a {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     color: var(--primary-color);
     font-weight: 600;
-    font-size: 1.35rem;
+    font-size: clamp(0.9rem, 1.3vw, 1.3rem);
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     position: relative;
+    white-space: nowrap;
 }
 nav a:hover {
     color: var(--accent-color);
@@ -76,7 +97,7 @@ nav a::after {
 nav a:hover::after {
     width: 100%;
 }
-/* Hero Section - ANGEPASST */
+
 .hero {
     height: 50vh;
     display: flex;
@@ -85,9 +106,11 @@ nav a:hover::after {
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 0 20px; /* Seitlicher Padding für Mobile */
-    width: 100vw; /* Volle Breite */
+    padding: 0 20px;
+    width: 100%;
+    text-align: center;
 }
+
 .hero::before {
     content: '';
     position: absolute;
@@ -97,10 +120,12 @@ nav a:hover::after {
     background-size: 50px 50px;
     animation: moveGrid 20s linear infinite;
 }
+
 @keyframes moveGrid {
     0% { transform: translate(0, 0); }
     100% { transform: translate(50px, 50px); }
 }
+
 @font-face {
     font-family: 'Acorn';
     src: url('Acorn-Bold.eot');
@@ -113,6 +138,7 @@ nav a:hover::after {
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'Acorn';
     src: url('Acorn-SemiBold.eot');
@@ -125,21 +151,25 @@ nav a:hover::after {
     font-style: normal;
     font-display: swap;
 }
-/* TITEL ANPASSUNGEN */
+
 .hero h1 {
     font-family: 'Acorn', sans-serif;
-    font-size: clamp(5rem, 11vw, 10.5rem); /* Angepasst für eine Zeile */
+    font-size: clamp(5rem, 11vw, 10.5rem);
     color: var(--primary-color);
-    margin: 0;
-    padding: 0; /* Kein Padding */
+    margin: 0 auto;
+    padding: 0;
     z-index: 1;
     animation: fadeInUp 1s ease;
-    letter-spacing: 2px; /* Reduziert von 4px */
+    letter-spacing: 2px;
     font-weight: bold;
-    line-height: 1; /* Standard Zeilenhöhe */
-    white-space: nowrap; /* Verhindert Zeilenumbruch */
-    transform: translateY(1vh); /* Verschiebt den Titel nach oben */
+    line-height: 1;
+    white-space: nowrap;
+    transform: translateY(1vh);
+    text-align: center; 
+    display: block; 
+    width: 100%; 
 }
+
 .hero h2 {
     font-size: 2rem;
     color: var(--text-light);
@@ -149,7 +179,9 @@ nav a:hover::after {
     margin-bottom: -40vh;
     padding: 0;
     font-weight: 400;
+    text-align: center;
 }
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -160,20 +192,23 @@ nav a:hover::after {
         transform: translateY(0);
     }
 }
-/* Sections */
+
 section {
     padding: 80px 40px;
     max-width: 1200px;
     margin: 0 auto;
 }
+
 #projekte {
     background: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     margin: 40px auto;
 }
+
 #ueber, #skills {
     background: transparent;
 }
+
 h2 {
     font-family: 'Acorn', sans-serif;
     font-size: 2.7rem;
@@ -183,23 +218,25 @@ h2 {
     position: relative;
     font-weight: 600;
 }
+
 h2::after {
     content: '';
     position: absolute;
-    bottom: 10px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
     width: 50px;
     height: 3px;
     background: var(--accent-color);
 }
-/* Projects Section */
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     margin-top: 20px;
 }
+
 .project-card {
     background: white;
     border-radius: 15px;
@@ -207,30 +244,41 @@ h2::after {
     box-shadow: var(--shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
+
 .project-image {
     width: 100%;
-    height: 200px;
+    height: 250px;
     background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: white;
     overflow: hidden;
+    flex-shrink: 0;
 }
+
 .project-image img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
+
 .project-content {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
+
 .project-title {
     font-size: 1.5rem;
     color: var(--primary-color);
@@ -238,40 +286,86 @@ h2::after {
     text-decoration: underline;
     margin-bottom: 15px;
 }
+
 .project-links {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    gap: 15px;
 }
+
 .project-links a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
+
 .project-links a:hover {
     color: var(--accent-color);
 }
+
+.project-links .fab.fa-github {
+    font-size: 2rem !important;
+}
+
+.download-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+}
+
 .project-description {
     color: var(--text-light);
     line-height: 1.6;
+    margin-top: auto;
 }
-/* About Section */
-.about-content {
+
+.download-notice {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(45, 96, 92, 0.1);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+#ueber {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
 }
-.about-text {
+
+#ueber .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    display: block !important;
+}
+
+.about-content p {
     font-size: 1.1rem;
     color: var(--text-light);
     margin-bottom: 30px;
-    line-height: 1.5;
-    white-space: normal;
-    text-align: justify;
-    letter-spacing: -1px;
+    line-height: 1.8 !important;
+    text-align: left !important;
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
+    white-space: normal !important;
+    -webkit-hyphens: none !important;
+    -moz-hyphens: none !important;
+    -ms-hyphens: none !important;
+    hyphens: none !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
 }
+
 .download-cv {
     display: inline-block;
     padding: 12px 30px;
@@ -280,13 +374,14 @@ h2::after {
     text-decoration: none;
     border-radius: 30px;
     transition: all 0.3s ease;
-    margin-top: 20px;
+    margin-top: 10px !important;
 }
+
 .download-cv:hover {
     background: var(--accent-color);
     transform: scale(1.05);
 }
-/* Skills Section */
+
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -296,90 +391,120 @@ h2::after {
     margin-left: auto;
     margin-right: auto;
 }
+
 .skill-item {
     text-align: center;
     transition: transform 0.3s ease;
 }
+
 .skill-item:hover {
     transform: scale(1.1);
 }
+
 .skill-item i {
     font-size: 4rem;
     color: var(--primary-color);
     margin-bottom: 10px;
 }
+
+.skill-item svg {
+    width: 4rem;
+    height: 4rem;
+    fill: var(--primary-color);
+    margin-bottom: 10px;
+}
+
 .skill-item p {
     color: var(--text-light);
     font-weight: 500;
 }
-/* Contact Section */
+
 #kontakt {
     background: var(--primary-color);
     border-radius: 20px;
     margin: 40px auto;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 40px !important;
-    max-width: 700px;
+    padding: clamp(30px, 4vw, 60px) !important;
+    max-width: min(700px, 90vw);
+    width: 100%;
 }
+
+#kontakt .container {
+    width: 100%;
+    max-width: 100%;
+}
+
 #kontakt h2 {
     color: white;
+    font-size: clamp(2rem, 3vw, 3rem);
+    margin-bottom: clamp(30px, 5vw, 60px);
 }
+
 #kontakt h2::after {
     background: rgba(255, 255, 255, 0.5);
 }
+
 .contact-form {
-    max-width: 500px;
+    max-width: 100%;
     margin: 0 auto;
+    width: 100%;
 }
+
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: clamp(15px, 2vw, 25px);
 }
+
 .form-group label {
     display: block;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 8px;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
 }
+
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 12px 15px;
+    padding: clamp(10px, 1.5vw, 15px) clamp(12px, 2vw, 20px);
     border: 2px solid transparent;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
 }
+
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-color);
     background: white;
 }
+
 .form-group textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: clamp(100px, 15vh, 150px);
 }
+
 .submit-btn {
     background: white;
     color: var(--primary-color);
-    padding: 12px 35px;
+    padding: clamp(10px, 1.5vw, 15px) clamp(25px, 3vw, 40px);
     border: none;
     border-radius: 25px;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.3vw, 1.2rem);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     display: block;
-    margin: 25px auto 0;
+    margin: clamp(20px, 3vw, 30px) auto 0;
 }
+
 .submit-btn:hover {
     background: var(--accent-color);
     transform: scale(1.05);
 }
-/* Footer - ERSETZEN Sie den bestehenden Footer-CSS-Code mit diesem */
+
 footer {
     background: transparent;
     color: var(--primary-color);
@@ -411,73 +536,230 @@ footer a:hover {
     color: var(--accent-color);
 }
 
-/* Responsive Footer - WICHTIG: Diese Media Queries ebenfalls anpassen */
-@media (max-width: 768px) {
-    footer .container {
-        /* Bleibt horizontal auch auf Tablets */
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 20px;
-    }
-    
-    footer {
-        padding: 20px;
+/*Browser-Kompatibilität */
+@supports (-webkit-appearance: none) and (not (-ms-ime-align: auto)) {
+    .about-content p {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
     }
 }
 
-@media (max-width: 480px) {
-    /* Erst bei sehr kleinen Screens vertikal */
-    footer .container {
-        flex-direction: column;
-        gap: 10px;
+/* GROSSE BILDSCHIRME (22-27 Zoll) */
+@media (min-width: 1920px) {
+    header {
+        padding: 25px 60px;
+    }
+    
+    nav {
+        max-width: 2000px;
+    }
+    
+    .logo {
+        font-size: 3.5rem;
+    }
+    
+    nav ul {
+        gap: 50px;
+    }
+    
+    nav a {
+        font-size: 1.6rem;
+    }
+    
+    #kontakt {
+        max-width: 900px;
+        padding: 70px !important;
+    }
+    
+    .contact-form {
+        max-width: 600px;
+    }
+    
+    .form-group {
+        margin-bottom: 30px;
+    }
+    
+    .form-group label {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 18px 25px;
+        font-size: 1.2rem;
+    }
+    
+    .form-group textarea {
+        min-height: 180px;
+    }
+    
+    .submit-btn {
+        padding: 18px 50px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1920px) {
+    .hero h1 {
+        text-align: center !important;
+        margin: 0 auto;
+        display: block;
+        width: 100%;
+    }
+    
+    .hero {
+        text-align: center;
+    }
+}
+
+/* ULTRA-WIDE MONITORE */
+@media (min-width: 2560px) {
+    header {
+        padding: 30px 80px;
+    }
+    
+    nav {
+        max-width: 2400px;
+    }
+    
+    .logo {
+        font-size: 4rem;
+    }
+    
+    nav ul {
+        gap: 60px;
+    }
+    
+    nav a {
+        font-size: 1.8rem;
+    }
+    
+    #kontakt {
+        max-width: 1000px;
+        padding: 80px !important;
+    }
+    
+    .contact-form {
+        max-width: 700px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 20px 30px;
+        font-size: 1.3rem;
+    }
+    
+    .submit-btn {
+        padding: 20px 60px;
+        font-size: 1.4rem;
+    }
+}
+
+/* LAPTOP-ANPASSUNGEN (13-17 Zoll) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .hero h1 {
+        font-size: clamp(4rem, 9vw, 8rem);
         text-align: center;
     }
     
-    footer {
-        padding: 20px 15px;
+    section {
+        padding: 60px 30px;
+    }
+    
+    .about-content {
+        max-width: 700px;
+    }
+    
+    .about-content p {
+        font-size: 1rem;
+        line-height: 1.7;
     }
 }
+
+/* LAPTOP & DESKTOP (1024px - 1920px) */
+@media (min-width: 1024px) and (max-width: 1920px) {
+    #kontakt {
+        max-width: 700px;
+        padding: 50px !important;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .hero h1 {
         font-size: clamp(4.5rem, 8vw, 8rem);
         letter-spacing: 1px;
+        text-align: center;
     }
     
     .hero h2 {
         font-size: 1.6rem;
     }
 }
-@media (max-width: 768px) {
-    /* Header anpassen */
+
+/* TABLET (768px - 1024px) */
+@media (max-width: 1024px) {
     header {
-        padding: 15px 20px;
+        padding: 15px 30px;
+    }
+    
+    nav ul {
+        gap: 20px;
+    }
+    
+    nav a {
+        font-size: 1.1rem;
+    }
+    
+    #kontakt {
+        margin: 30px auto;
+        padding: 40px 30px !important;
+    }
+}
+
+/* SMARTPHONES (max-width: 768px) - WICHTIG: Horizontale Navigation */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px;
         background: rgba(255, 255, 255, 0.95);
     }
     
     nav {
-        flex-direction: column;
+        flex-direction: row !important; 
+        justify-content: space-between;
+        align-items: center;
         gap: 10px;
     }
     
     .logo {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        flex-shrink: 0;
     }
     
     nav ul {
-        gap: 15px;
+        display: flex !important;
+        flex-direction: row !important; 
+        gap: 8px;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     nav a {
-        font-size: 1rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        padding: 5px 2px;
     }
     
-    /* Hero Fix - Titel sichtbar machen */
+    nav a::after {
+        display: none;
+    }
+    
     .hero {
         height: auto;
         min-height: 60vh;
-        padding: 100px 20px 40px 20px;
-        margin-top: 70px;
+        padding: 60px 20px 40px 20px;
+        margin-top: 50px;
     }
     
     .hero h1 {
@@ -485,6 +767,7 @@ footer a:hover {
         transform: none !important;
         margin: 0 0 20px 0 !important;
         white-space: normal;
+        text-align: center;
     }
     
     .hero h2 {
@@ -494,17 +777,31 @@ footer a:hover {
         line-height: 1.4;
     }
     
-    /* Projects */
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 25px;
     }
     
-    /* Skills */
+    .project-image {
+        height: 200px;
+    }
+    
+    .project-content {
+        padding: 20px;
+    }
+    
+    .project-title {
+        font-size: 1.3rem;
+    }
+    
+    .project-links {
+        gap: 10px;
+    }
+    
     .skills-grid {
         grid-template-columns: repeat(3, 1fr);
     }
     
-    /* Footer bleibt horizontal */
     footer {
         flex-direction: row;
         gap: 15px;
@@ -516,6 +813,10 @@ footer a:hover {
         font-size: 2rem;
     }
     
+    h2::after {
+        bottom: -10px;
+    }
+    
     #projekte {
         margin: 20px 15px;
     }
@@ -523,34 +824,92 @@ footer a:hover {
     section {
         padding: 30px 20px;
     }
-}
-@media (max-width: 480px) {
-    /* Sehr kleine Smartphones */
-    header {
-        padding: 10px 15px;
+    
+    /* Contact Section Mobile */
+    #kontakt {
+        margin: 20px !important;
+        padding: 30px !important;
+        border-radius: 15px;
+        width: calc(100% - 40px);
+        max-width: none;
     }
     
-    .logo {
-        font-size: 1.5rem;
+    #kontakt .container {
+        padding: 0 10px;
     }
     
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
     }
     
-    nav a {
+    #kontakt h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
         font-size: 0.9rem;
     }
     
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
+    }
+    
+    .submit-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* KLEINE SMARTPHONES (max-width: 480px) */
+@media (max-width: 480px) {
+    header {
+        padding: 8px 10px;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+    }
+    
+    nav ul {
+        gap: 5px;
+    }
+    
+    nav a {
+        font-size: 0.65rem;
+        letter-spacing: -0.3px;
+    }
+    
+    nav a strong {
+        font-weight: 500;
+    }
+    
+    nav a::after {
+        display: none !important;
+    }
+    
     .hero {
-        padding: 80px 15px 30px 15px;
+        padding: 50px 15px 30px 15px;
         min-height: 40vh;
+        margin-top: 45px;
     }
     
     .hero h1 {
         font-size: clamp(2rem, 10vw, 3rem);
         letter-spacing: -1px;
+        text-align: center;
     }
     
     .hero h2 {
@@ -563,6 +922,10 @@ footer a:hover {
         margin-bottom: 30px;
     }
     
+    h2::after {
+        display: none;
+    }
+    
     section {
         padding: 25px 15px;
     }
@@ -571,31 +934,50 @@ footer a:hover {
         gap: 20px;
     }
     
+    .project-image {
+        height: 180px;
+    }
+    
     .project-content {
-        padding: 20px;
+        padding: 15px;
     }
     
     .project-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .project-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .project-links a {
+        font-size: 0.9rem;
     }
     
     .project-description {
         font-size: 0.9rem;
+        margin-top: 10px;
     }
     
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .skill-item i {
+    .skill-item i,
+    .skill-item svg {
         font-size: 3rem;
+        width: 3rem;
+        height: 3rem;
     }
     
     #projekte {
         margin: 15px 10px;
     }
     
-    /* Footer für sehr kleine Screens */
     footer {
         flex-direction: column;
         gap: 10px;
@@ -603,9 +985,45 @@ footer a:hover {
         padding: 20px 15px;
     }
     
-    /* Form - verhindert iOS Zoom */
+    footer .container {
+        flex-direction: column;
+    }
+    
+    /* Contact Section Kleine Smartphones */
+    #kontakt {
+        margin: 15px !important;
+        padding: 25px 20px !important;
+        width: calc(100% - 30px);
+    }
+    
+    #kontakt h2 {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+    
+    .form-group label {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+    
     .form-group input,
     .form-group textarea {
+        padding: 10px 12px;
         font-size: 16px;
+    }
+    
+    .form-group textarea {
+        min-height: 80px;
+    }
+    
+    .submit-btn {
+        width: 100%;
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        margin-top: 15px;
     }
 }
